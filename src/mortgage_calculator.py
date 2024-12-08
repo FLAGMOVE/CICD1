@@ -27,5 +27,5 @@ payment = calculate_monthly_payment(principal, annual_rate, years)
 
 # Старый способ форматирования строк для Python 3.5
 print("Your monthly payment is: {:.2f}".format(payment))
-print("Updated version 4: Your monthly payment is: 1432.25")
+print("Updated version 5: Your monthly payment is: 1432.25")
 
