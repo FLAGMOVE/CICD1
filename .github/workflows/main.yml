@@ -20,7 +20,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r req.txt
       - name: Run tests
-        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
+          pytest TESTS
           chmod +x cicd/test.sh
           ./cicd/test.sh
 
