@@ -32,4 +32,3 @@ payment = calculate_monthly_payment(principal, annual_rate, years)
 print("Your monthly payment is: {:.2f}".format(payment))
 print("Updated version 3: Your monthly payment is: 1432.25")
 
-sys.exit(0)
