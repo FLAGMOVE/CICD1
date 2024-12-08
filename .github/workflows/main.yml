@@ -39,12 +39,19 @@ jobs:
       - name: Set up SSH key
         run: |
           echo "Creating .ssh directory"
-          mkdir -p ~/.ssh
-          echo "Adding known hosts"
-          ssh-keyscan -H 192.168.56.107 >> ~/.ssh/known_hosts
-          ls -al ~/.ssh  # Check if the directory was created correctly
+            mkdir -p ~/.ssh
+            chmod 700 ~/.ssh
+            echo "Adding known hosts"
+            ssh-keyscan -H 192.168.56.107 >> ~/.ssh/known_hosts || { echo "Failed to add known host"; exit 1; }
+            chmod 644 ~/.ssh/known_hosts
+            ls -al ~/.ssh
+
 
       - name: Deploy to server
         run: |
           chmod +x cicd/deploy.sh
-          ./cicd/deploy.sh
+          ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_IP" << EOF
+          cd $PROJECT_PATH
+          sudo systemctl restart mortgage.service
+          EOF
+
