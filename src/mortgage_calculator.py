@@ -1,24 +1,21 @@
 import sys
 
+
 # Пример кода калькулятора ипотеки, совместимый с Python 3.5
 
 def calculate_monthly_payment(principal, annual_rate, years):
-    """
-    Функция для вычисления ежемесячного платежа по ипотеке.
+    # Преобразование годовой ставки в месячную
+    monthly_rate = annual_rate / 100 / 12
+    # Количество месяцев
+    months = years * 12
     
-    :param principal: Сумма кредита (основной долг).
-    :param annual_rate: Годовая процентная ставка (в долях от 1).
-    :param years: Срок кредита в годах.
-    :return: Ежемесячный платеж.
-    """
-    monthly_rate = annual_rate / 12  # Месячная процентная ставка
-    num_payments = years * 12  # Общее количество платежей
-
-    # Формула для расчета ежемесячного платежа
     if monthly_rate == 0:
-        return principal / num_payments
-    else:
-        return (principal * monthly_rate) / (1 - (1 + monthly_rate) ** -num_payments)
+        return principal / months  # Если ставка 0, то просто делим сумму на количество месяцев
+    
+    # Рассчитываем ежемесячный платеж
+    monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** months) / ((1 + monthly_rate) ** months - 1)
+    
+    return monthly_payment
 
 
 # Пример использования:

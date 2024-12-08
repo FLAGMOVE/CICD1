@@ -1,5 +1,10 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+from mortgage_calculator import calculate_monthly_payment
+
 import pytest
-from src.mortgage_calculator import calculate_monthly_payment
 
 def test_monthly_payment():
     assert calculate_monthly_payment(100000, 5, 30) == pytest.approx(536.82, rel=1e-2)
