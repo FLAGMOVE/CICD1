@@ -1,13 +1,30 @@
-def calculate_monthly_payment(principal, annual_rate, years):
-    monthly_rate = annual_rate / 12 / 100
-    total_months = years * 12
-    if monthly_rate == 0:
-        return principal / total_months
-    return principal * (monthly_rate * (1 + monthly_rate) ** total_months) / ((1 + monthly_rate) ** total_months - 1)
+# Пример кода калькулятора ипотеки, совместимый с Python 3.5
 
-if __name__ == "__main__":
-    principal = float(input("Enter loan amount: "))
-    annual_rate = float(input("Enter annual interest rate (in %): "))
-    years = int(input("Enter loan term (in years): "))
-    payment = calculate_monthly_payment(principal, annual_rate, years)
-    print(f"Your monthly payment is: {payment:.2f}")
+def calculate_monthly_payment(principal, annual_rate, years):
+    """
+    Функция для вычисления ежемесячного платежа по ипотеке.
+    
+    :param principal: Сумма кредита (основной долг).
+    :param annual_rate: Годовая процентная ставка (в долях от 1).
+    :param years: Срок кредита в годах.
+    :return: Ежемесячный платеж.
+    """
+    monthly_rate = annual_rate / 12  # Месячная процентная ставка
+    num_payments = years * 12  # Общее количество платежей
+
+    # Формула для расчета ежемесячного платежа
+    if monthly_rate == 0:
+        return principal / num_payments
+    else:
+        return (principal * monthly_rate) / (1 - (1 + monthly_rate) ** -num_payments)
+
+
+# Пример использования:
+principal = 300000  # Сумма кредита
+annual_rate = 0.04  # Годовая ставка 4%
+years = 30  # Срок кредита
+
+payment = calculate_monthly_payment(principal, annual_rate, years)
+
+# Старый способ форматирования строк для Python 3.5
+print("Your monthly payment is: {:.2f}".format(payment))
