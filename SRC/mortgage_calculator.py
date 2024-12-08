@@ -1,3 +1,5 @@
+import sys
+
 # Пример кода калькулятора ипотеки, совместимый с Python 3.5
 
 def calculate_monthly_payment(principal, annual_rate, years):
@@ -28,3 +30,5 @@ payment = calculate_monthly_payment(principal, annual_rate, years)
 
 # Старый способ форматирования строк для Python 3.5
 print("Your monthly payment is: {:.2f}".format(payment))
+
+sys.exit(0)
